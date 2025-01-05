@@ -16,7 +16,7 @@ const useProtectedRoute = () => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (!user) {
                 setUserData(null);
-                router.push(`${prefix}/login`); // Redirect to login if not authenticated
+                // router.push(`${prefix}/login`); // Redirect to login if not authenticated
             } else {
                 setUserData(user);
                 // router.push(`${prefix}/`); // Redirect to login if not authenticated

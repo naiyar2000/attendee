@@ -13,7 +13,7 @@ const LoginPage = () => {
     try {
       const user = await signInWithGoogle();
       if (user.emailVerified) {
-        router.push(`${prefix}/`);
+        // router.push(`${prefix}/`);
       }
     } catch (error) {
       console.error("Login failed:", error);
