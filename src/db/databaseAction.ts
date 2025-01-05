@@ -1,4 +1,3 @@
-import { CourseAttendance } from "@/app/CourseList";
 import { db } from "@/app/firebase/firebaseConfig"
 import { arrayUnion, collection, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore"
 
@@ -52,7 +51,7 @@ export const add_attendance = async ({ userId, courseIndex, attended, date }: { 
     const courseRef = doc(db, "users", userId);
     const courseDocSnap = await getDoc(courseRef);
 
-    let courses: any = [];
+    let courses: object[] = [];
 
     if (courseDocSnap.exists()) {
         courses = courseDocSnap.data().courses;
@@ -73,37 +72,4 @@ export const add_attendance = async ({ userId, courseIndex, attended, date }: { 
             data: data
         })
     }
-}
-
-export const get_attendance = async ({ userId, date }: { userId: string, date: string }) => {
-    // const attendanceCollectionRef = collection(db, "users", userId, "attendance", "data");
-    const attendanceRef = doc(db, `users/${userId}/attendance`, date);
-    const attendanceDocSnap = await getDoc(attendanceRef);
-
-    if (attendanceDocSnap.exists()) {
-        return attendanceDocSnap.data().data as CourseAttendance[];
-    } else {
-        const currentDate = new Date();
-        const formattedDate = `${String(currentDate.getDate()).padStart(2, '0')}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${currentDate.getFullYear()}`;
-        const attendanceCollectionRef = collection(db, "users", userId, "attendance");
-        const attendanceRef = doc(attendanceCollectionRef, formattedDate);
-        const attendanceDocSnap = await getDoc(attendanceRef);
-
-        const courseRef = doc(db, "users", userId);
-        const courseDocSnap = await getDoc(courseRef);
-
-        let courses: any = [];
-
-        if (courseDocSnap.exists()) {
-            courses = courseDocSnap.data().courses;
-        }
-        let data = courses?.map((x: Object) => ({ ...x, attended: false }))
-
-        await setDoc(attendanceRef, {
-            data: data
-        })
-
-        alert("No data found!");
-    }
-    return null;
 }
