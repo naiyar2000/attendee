@@ -3,6 +3,7 @@ import { signInWithGoogle } from '@/auth';
 import React from 'react'
 import { SiGoogle } from "@icons-pack/react-simple-icons"
 import { useRouter } from 'next/navigation';
+import { prefix } from '@/prefix';
 
 const LoginPage = () => {
 
@@ -12,7 +13,7 @@ const LoginPage = () => {
     try {
       const user = await signInWithGoogle();
       if (user.emailVerified) {
-        router.push("/");
+        router.push(`${prefix}/`);
       }
     } catch (error) {
       console.error("Login failed:", error);
