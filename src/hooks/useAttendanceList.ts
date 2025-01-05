@@ -28,7 +28,7 @@ const useAttendanceList = (userId: string, date: string) => {
 
         // Cleanup subscription on unmount or date change
         return () => unsubscribe();
-    }, [userId, date]);
+    }, [userId, date, updateDayData]);
 
     return data;
 };
