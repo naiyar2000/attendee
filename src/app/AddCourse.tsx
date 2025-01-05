@@ -4,27 +4,38 @@ import { Slider } from '@/components/ui/slider';
 import { add_course } from '@/db/databaseAction';
 import { FormEvent, useState } from 'react';
 import { useAuthStore } from './store/authStore';
+import { useAppStore } from './store/appStore';
 
 interface AddCourseProps {
     handleClose: () => void
 }
 
 const AddCourse = ({ handleClose }: AddCourseProps) => {
+    const setAlert = useAppStore(state => state.setAlert)
 
     const [courseName, setCourseName] = useState("");
     const [attendance, setAttendance] = useState(75);
     const userData = useAuthStore(state => state.userData);
 
-    const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        console.log("Form Submitted");
-
-        add_course({
-            courseName: courseName,
-            attendance: attendance,
-            userId: userData?.uid ?? ""
-        })
+        try {
+            let isSuccessfull = await add_course({
+                courseName: courseName,
+                attendance: attendance,
+                userId: userData?.uid ?? ""
+            })
+            if (isSuccessfull) {
+                setAlert({ type: "success", message: "Course added successfyll!!!" })
+                setCourseName("");
+                setAttendance(75);
+            } else {
+                setAlert({ type: "error", message: "Something went wrong!!!" })
+            }
+        } catch (error) {
+            setAlert({ type: "error", message: "Something went wrong!!!" })
+        }
     }
     return (
         <form onSubmit={handleFormSubmit} className="flex flex-col text-white gap-4 bg-glass-card">

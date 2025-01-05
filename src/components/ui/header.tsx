@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 const Header = () => {
 
     const userData = useAuthStore((state) => state.userData);
+    const setUserData = useAuthStore((state) => state.setUserData);
     const router = useRouter();
 
     const { scrollPosition } = useScrollPosition();
@@ -24,7 +25,7 @@ const Header = () => {
     const handleLogout = async () => {
         try {
             await signOut(auth);
-            router.push(`${prefix}/login`);
+            setUserData(null);
             setShowOptions(false);
         } catch (error) {
             console.error("Error signing out:", error);

@@ -5,6 +5,7 @@ export const add_course = async ({ courseName, attendance, userId }: { courseNam
     const userRef = doc(db, "users", userId);
     const docSnap = await getDoc(userRef);
 
+
     if (docSnap.exists()) {
         const updatedData = docSnap.data()?.courses || [];
         updatedData.push({
@@ -28,6 +29,9 @@ export const add_course = async ({ courseName, attendance, userId }: { courseNam
                 })
             });
         });
+        return true;
+    } else {
+        return false;
     }
 
 }
