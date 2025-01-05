@@ -19,7 +19,7 @@ const useProtectedRoute = () => {
                 router.push(`${prefix}/login`); // Redirect to login if not authenticated
             } else {
                 setUserData(user);
-                router.push(`${prefix}/`); // Redirect to login if not authenticated
+                // router.push(`${prefix}/`); // Redirect to login if not authenticated
             }
         });
 
