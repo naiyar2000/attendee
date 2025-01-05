@@ -7,6 +7,7 @@ export type CourseAttendance = {
     courseName: string;
     attendanceRequired: number;
     attended: boolean;
+    skipped: boolean;
 }
 
 const CourseList = ({ selectedDate }: { selectedDate: Date | undefined }) => {
