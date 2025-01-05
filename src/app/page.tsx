@@ -1,12 +1,10 @@
 "use client";
 import { DatePicker } from "@/components/ui/datepicker";
 import useProtectedRoute from "@/hooks/useProtectedRoutes";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import CourseList from "./CourseList";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Slider } from "@/components/ui/slider";
 import AddCourse from "./AddCourse";
 
 export default function Home() {

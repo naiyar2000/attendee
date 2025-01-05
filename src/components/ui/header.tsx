@@ -4,7 +4,7 @@ import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { prefix } from "@/prefix";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUp, Code, Star, User, X as Delete, Home, LogOut } from "lucide-react";
+import { ArrowUp, X as Delete, Home, LogOut } from "lucide-react";
 import { useState } from "react";
 import { useAuthStore } from "@/app/store/authStore";
 import { signOut } from "firebase/auth";
@@ -14,7 +14,6 @@ import { useRouter } from "next/navigation";
 
 const Header = () => {
 
-    const setUserData = useAuthStore((state) => state.setUserData);
     const userData = useAuthStore((state) => state.userData);
     const router = useRouter();
 

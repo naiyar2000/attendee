@@ -2,15 +2,13 @@ import { useEffect, useState } from "react";
 import { onSnapshot, doc } from "firebase/firestore";
 import { db } from "@/app/firebase/firebaseConfig";
 import { CourseAttendance } from "@/app/CourseList";
-import { add_attendance, get_course } from "@/db/databaseAction";
+import { add_attendance } from "@/db/databaseAction";
 
 const useAttendanceList = (userId: string, date: string) => {
     const [data, setData] = useState<CourseAttendance[]>([]);
 
     const updateDayData = async () => {
-
         await add_attendance({ userId, date });
-
     }
     useEffect(() => {
         console.log(userId)

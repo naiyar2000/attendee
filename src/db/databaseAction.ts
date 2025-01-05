@@ -1,13 +1,13 @@
 import { CourseAttendance } from "@/app/CourseList";
 import { db } from "@/app/firebase/firebaseConfig"
-import { arrayUnion, collection, doc, getDoc, getDocs, onSnapshot, setDoc, updateDoc } from "firebase/firestore"
+import { arrayUnion, collection, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore"
 
 export const add_course = async ({ courseName, attendance, userId }: { courseName: string, attendance: number, userId: string }) => {
     const userRef = doc(db, "users", userId);
     const docSnap = await getDoc(userRef);
 
     if (docSnap.exists()) {
-        let updatedData = docSnap.data()?.courses || [];
+        const updatedData = docSnap.data()?.courses || [];
         updatedData.push({
             courseName: courseName,
             attendanceRequired: attendance
@@ -61,14 +61,14 @@ export const add_attendance = async ({ userId, courseIndex, attended, date }: { 
 
 
     if (attendanceDocSnap.exists() && courseIndex !== undefined) {
-        let updatedData = attendanceDocSnap.data()?.data || [];
+        const updatedData = attendanceDocSnap.data()?.data || [];
         updatedData[courseIndex].attended = attended;
         await updateDoc(attendanceRef, {
             data: updatedData
         });
         console.log(attendanceDocSnap.data());
     } else {
-        let data = courses?.map((x: Object) => ({ ...x, attended: false }))
+        const data = courses?.map((x: object) => ({ ...x, attended: false }))
         await setDoc(attendanceRef, {
             data: data
         })

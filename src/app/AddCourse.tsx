@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
-import { add_attendance, add_course } from '@/db/databaseAction';
+import { add_course } from '@/db/databaseAction';
 import { FormEvent, useState } from 'react';
 import { useAuthStore } from './store/authStore';
 
